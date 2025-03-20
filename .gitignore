@@ -1,0 +1,54 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+packages/
+*.nuspec
+
+# Visual Studio 2019
+.vs/
+.vsconfig
+
+# User-specific files
+*.sln.ide
+*.sln.user
+*.sln.docstates
+
+# Backup files
+*.bak
+*.tmp
+*.temp
+
+# Other files
+*.pdb
+*.mdb
+*.log
+*.cache
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Ignore any other files you want to exclude
