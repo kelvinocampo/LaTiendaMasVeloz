@@ -17,7 +17,7 @@ namespace Principal
         {
             InitializeComponent();
 
-            dataGridView1.CellContentClick += new DataGridViewCellEventHandler(EliminarDatos);
+            dataGridView1.CellContentClick += new DataGridViewCellEventHandler(ButtonsActions);
         }
 
         private void Clientes_Load(object sender, EventArgs e)
@@ -46,13 +46,26 @@ namespace Principal
             btnEdit.HeaderText = "Editar";
             btnEdit.Text = "Editar";
             btnEdit.Name = "Editar";
-            btnEdit.FlatStyle=FlatStyle.Flat;
+            btnEdit.FlatStyle = FlatStyle.Flat;
             btnEdit.UseColumnTextForButtonValue = true;
             btnEdit.DefaultCellStyle.BackColor = Color.RoyalBlue; // Color de fondo
             btnEdit.DefaultCellStyle.ForeColor = Color.White; // Color del texto
             btnEdit.DefaultCellStyle.SelectionBackColor = Color.DarkBlue; // Color de fondo al seleccionar
             btnEdit.DefaultCellStyle.SelectionForeColor = Color.White; // Color del texto al seleccionar
             dataGridView1.Columns.Add(btnEdit);
+
+            // Botón Eliminar
+            DataGridViewButtonColumn btnSave = new DataGridViewButtonColumn();
+            btnSave.HeaderText = "Guardar";
+            btnSave.Text = "Guardar";
+            btnSave.Name = "Guardar";
+            btnSave.FlatStyle = FlatStyle.Flat;
+            btnSave.UseColumnTextForButtonValue = true;
+            btnSave.DefaultCellStyle.BackColor = Color.Green; // Color de fondo
+            btnSave.DefaultCellStyle.ForeColor = Color.White; // Color del texto
+            btnSave.DefaultCellStyle.SelectionBackColor = Color.GreenYellow; // Color de fondo al seleccionar
+            btnSave.DefaultCellStyle.SelectionForeColor = Color.White; // Color del texto al seleccionar
+            dataGridView1.Columns.Add(btnSave);
 
             // Botón Eliminar
             DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
@@ -68,15 +81,32 @@ namespace Principal
             dataGridView1.Columns.Add(btnDelete);
         }
 
-        private void EliminarDatos(object sender, DataGridViewCellEventArgs e)
+        private void ButtonsActions(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index && e.RowIndex >= 0)
+            if (e.RowIndex < 0) return;
+
+            if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index)
             {
-                int Doc = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Documento"].Value);
+                int doc = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Documento"].Value);
                 ClienteController clienteController = new ClienteController();
-                clienteController.Delete(Doc);
-                CargarDatos();
+                clienteController.Delete(doc);
             }
+            else if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index)
+            {
+                foreach (DataGridViewCell cell in dataGridView1.Rows[e.RowIndex].Cells)
+                {
+                    cell.ReadOnly = false;
+                }
+            }
+            else if (e.ColumnIndex == dataGridView1.Columns["Guardar"].Index)
+            {
+                foreach (DataGridViewCell cell in dataGridView1.Rows[e.RowIndex].Cells)
+                {
+                    cell.ReadOnly = true;
+                }
+            }
+
+            CargarDatos();
         }
     }
 }

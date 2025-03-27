@@ -32,20 +32,18 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             splitContainer1 = new SplitContainer();
             splitContainer3 = new SplitContainer();
-            LinkClientes = new Label();
+            label3 = new Label();
+            jeje = new Label();
             LinkProveedores = new Label();
             LinkProductos = new Label();
             label2 = new Label();
             label1 = new Label();
             pictureBox1 = new PictureBox();
             splitContainer2 = new SplitContainer();
-            splitContainer4 = new SplitContainer();
             splitContainer5 = new SplitContainer();
             pictureBox2 = new PictureBox();
             Title = new Label();
-            FormInsert = new GroupBox();
             dataGridView1 = new DataGridView();
-            jeje = new Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -59,10 +57,6 @@
             splitContainer2.Panel1.SuspendLayout();
             splitContainer2.Panel2.SuspendLayout();
             splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer4).BeginInit();
-            splitContainer4.Panel1.SuspendLayout();
-            splitContainer4.Panel2.SuspendLayout();
-            splitContainer4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer5).BeginInit();
             splitContainer5.Panel1.SuspendLayout();
             splitContainer5.Panel2.SuspendLayout();
@@ -101,8 +95,8 @@
             // 
             // splitContainer3.Panel1
             // 
+            splitContainer3.Panel1.Controls.Add(label3);
             splitContainer3.Panel1.Controls.Add(jeje);
-            splitContainer3.Panel1.Controls.Add(LinkClientes);
             splitContainer3.Panel1.Controls.Add(LinkProveedores);
             splitContainer3.Panel1.Controls.Add(LinkProductos);
             splitContainer3.Panel1.Controls.Add(label2);
@@ -116,16 +110,25 @@
             splitContainer3.SplitterDistance = 417;
             splitContainer3.TabIndex = 6;
             // 
-            // LinkClientes
+            // label3
             // 
-            LinkClientes.AutoSize = true;
-            LinkClientes.Font = new Font("Gill Sans MT", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            LinkClientes.ForeColor = Color.RoyalBlue;
-            LinkClientes.Location = new Point(29, 137);
-            LinkClientes.Name = "LinkClientes";
-            LinkClientes.Size = new Size(64, 23);
-            LinkClientes.TabIndex = 5;
-            LinkClientes.Text = "Clientes";
+            label3.AutoSize = true;
+            label3.Font = new Font("Gill Sans MT", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.FromArgb(64, 64, 64);
+            label3.Location = new Point(29, 135);
+            label3.Name = "label3";
+            label3.Size = new Size(64, 23);
+            label3.TabIndex = 7;
+            label3.Text = "Clientes";
+            // 
+            // jeje
+            // 
+            jeje.AutoSize = true;
+            jeje.Location = new Point(29, 253);
+            jeje.Name = "jeje";
+            jeje.Size = new Size(38, 15);
+            jeje.TabIndex = 6;
+            jeje.Text = "label3";
             // 
             // LinkProveedores
             // 
@@ -141,6 +144,7 @@
             // LinkProductos
             // 
             LinkProductos.AutoSize = true;
+            LinkProductos.BackColor = Color.FromArgb(224, 224, 224);
             LinkProductos.Font = new Font("Gill Sans MT", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             LinkProductos.ForeColor = Color.FromArgb(64, 64, 64);
             LinkProductos.Location = new Point(29, 90);
@@ -184,7 +188,6 @@
             // splitContainer2
             // 
             splitContainer2.Dock = DockStyle.Fill;
-            splitContainer2.FixedPanel = FixedPanel.Panel1;
             splitContainer2.IsSplitterFixed = true;
             splitContainer2.Location = new Point(0, 0);
             splitContainer2.Name = "splitContainer2";
@@ -192,7 +195,7 @@
             // 
             // splitContainer2.Panel1
             // 
-            splitContainer2.Panel1.Controls.Add(splitContainer4);
+            splitContainer2.Panel1.Controls.Add(splitContainer5);
             splitContainer2.Panel1.Padding = new Padding(20);
             // 
             // splitContainer2.Panel2
@@ -200,32 +203,14 @@
             splitContainer2.Panel2.Controls.Add(dataGridView1);
             splitContainer2.Panel2.Padding = new Padding(20);
             splitContainer2.Size = new Size(841, 636);
-            splitContainer2.SplitterDistance = 375;
-            splitContainer2.TabIndex = 8;
-            // 
-            // splitContainer4
-            // 
-            splitContainer4.Dock = DockStyle.Fill;
-            splitContainer4.Location = new Point(20, 20);
-            splitContainer4.Name = "splitContainer4";
-            splitContainer4.Orientation = Orientation.Horizontal;
-            // 
-            // splitContainer4.Panel1
-            // 
-            splitContainer4.Panel1.Controls.Add(splitContainer5);
-            // 
-            // splitContainer4.Panel2
-            // 
-            splitContainer4.Panel2.Controls.Add(FormInsert);
-            splitContainer4.Size = new Size(801, 335);
-            splitContainer4.SplitterDistance = 96;
-            splitContainer4.TabIndex = 6;
+            splitContainer2.SplitterDistance = 151;
+            splitContainer2.TabIndex = 0;
             // 
             // splitContainer5
             // 
             splitContainer5.Dock = DockStyle.Fill;
             splitContainer5.IsSplitterFixed = true;
-            splitContainer5.Location = new Point(0, 0);
+            splitContainer5.Location = new Point(20, 20);
             splitContainer5.Name = "splitContainer5";
             // 
             // splitContainer5.Panel1
@@ -235,7 +220,7 @@
             // splitContainer5.Panel2
             // 
             splitContainer5.Panel2.Controls.Add(Title);
-            splitContainer5.Size = new Size(801, 96);
+            splitContainer5.Size = new Size(801, 111);
             splitContainer5.SplitterDistance = 108;
             splitContainer5.TabIndex = 6;
             // 
@@ -245,7 +230,7 @@
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
             pictureBox2.Location = new Point(0, 0);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(108, 96);
+            pictureBox2.Size = new Size(108, 111);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 5;
             pictureBox2.TabStop = false;
@@ -255,26 +240,17 @@
             Title.AutoSize = true;
             Title.Font = new Font("Gill Sans MT", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Title.ForeColor = Color.RoyalBlue;
-            Title.Location = new Point(572, 30);
+            Title.Location = new Point(572, 35);
             Title.Name = "Title";
             Title.Size = new Size(114, 40);
             Title.TabIndex = 6;
             Title.Text = "Clientes";
             // 
-            // FormInsert
-            // 
-            FormInsert.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            FormInsert.Location = new Point(0, 3);
-            FormInsert.Name = "FormInsert";
-            FormInsert.Size = new Size(798, 232);
-            FormInsert.TabIndex = 0;
-            FormInsert.TabStop = false;
-            FormInsert.Text = "Insertar Cliente";
-            // 
             // dataGridView1
             // 
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToOrderColumns = true;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.WhiteSmoke;
             dataGridView1.BorderStyle = BorderStyle.None;
@@ -292,17 +268,8 @@
             dataGridView1.Location = new Point(20, 20);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(801, 217);
+            dataGridView1.Size = new Size(801, 441);
             dataGridView1.TabIndex = 7;
-            // 
-            // jeje
-            // 
-            jeje.AutoSize = true;
-            jeje.Location = new Point(83, 287);
-            jeje.Name = "jeje";
-            jeje.Size = new Size(38, 15);
-            jeje.TabIndex = 6;
-            jeje.Text = "label3";
             // 
             // Clientes
             // 
@@ -327,10 +294,6 @@
             splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
             splitContainer2.ResumeLayout(false);
-            splitContainer4.Panel1.ResumeLayout(false);
-            splitContainer4.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer4).EndInit();
-            splitContainer4.ResumeLayout(false);
             splitContainer5.Panel1.ResumeLayout(false);
             splitContainer5.Panel2.ResumeLayout(false);
             splitContainer5.Panel2.PerformLayout();
@@ -351,13 +314,11 @@
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
         private DataGridView dataGridView1;
-        private SplitContainer splitContainer2;
         private SplitContainer splitContainer3;
-        private SplitContainer splitContainer4;
-        private GroupBox FormInsert;
         private SplitContainer splitContainer5;
-        private Label LinkClientes;
         private Label Title;
         private Label jeje;
+        private Label label3;
+        private SplitContainer splitContainer2;
     }
 }
