@@ -16,14 +16,18 @@ namespace Principal
         public Clientes()
         {
             InitializeComponent();
-
-            dataGridView1.CellContentClick += new DataGridViewCellEventHandler(ButtonsActions);
         }
 
         private void Clientes_Load(object sender, EventArgs e)
         {
             CargarDatos();
             AgregarBotones();
+            dataGridView1.CellDoubleClick += new DataGridViewCellEventHandler(ButtonsActions);
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                row.ReadOnly = true;
+            }
         }
 
         private void CargarDatos()
@@ -87,26 +91,34 @@ namespace Principal
 
             if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index)
             {
-                int doc = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Documento"].Value);
+                int ID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["ID"].Value);
                 ClienteController clienteController = new ClienteController();
-                clienteController.Delete(doc);
+                clienteController.Delete(ID);
+
+                CargarDatos();
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index)
             {
-                foreach (DataGridViewCell cell in dataGridView1.Rows[e.RowIndex].Cells)
-                {
-                    cell.ReadOnly = false;
-                }
+                dataGridView1.Rows[e.RowIndex].ReadOnly = false;
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Guardar"].Index)
             {
-                foreach (DataGridViewCell cell in dataGridView1.Rows[e.RowIndex].Cells)
+                foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                    cell.ReadOnly = true;
+                    row.ReadOnly = true;
                 }
-            }
 
-            CargarDatos();
+                ClienteController clienteController = new ClienteController();
+                int ID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["ID"].Value);
+                int Doc = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Documento"].Value);
+                string email = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Correo"].Value);
+                string phone = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Telefono"].Value);
+                string name = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Nombre"].Value);
+                string address = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Direccion"].Value);
+                clienteController.Update(ID, Doc, email, phone, name, address);
+
+                CargarDatos();
+            }
         }
     }
 }

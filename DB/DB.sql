@@ -4,9 +4,10 @@ DROP DATABASE IF EXISTS TiendaDB;
 CREATE DATABASE IF NOT EXISTS TiendaDB;
 USE TiendaDB;
 
-DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS client;
 CREATE TABLE IF NOT EXISTS client(
-Doc INT PRIMARY KEY AUTO_INCREMENT,
+ID INT PRIMARY KEY AUTO_INCREMENT,
+Doc INT,
 email VARCHAR(100),
 phone VARCHAR(15),
 name VARCHAR(100),
@@ -42,30 +43,48 @@ DELIMITER //
 CREATE PROCEDURE ObtenerClientes()
 BEGIN
     SELECT 
+		ID,
         Doc AS Documento,
         email AS Correo,
         phone AS Telefono,
         name AS Nombre,
         address AS Direccion
-    FROM 
-        client;
+    FROM client
+	ORDER BY ID;
 END //
 DELIMITER ;
 
 DROP PROCEDURE IF EXISTS EliminarCliente;
 DELIMITER $$
-CREATE PROCEDURE EliminarCliente(IN doc_cliente INT)
+CREATE PROCEDURE EliminarCliente(IN _ID INT)
 BEGIN
-    DELETE FROM client WHERE Doc = doc_cliente;
+    DELETE FROM client WHERE ID = _ID;
 END$$
 DELIMITER ;
 
-INSERT INTO client (email, phone, name, address) VALUES
-('cliente1@example.com', '1234567890', 'Juan Pérez', 'Calle Falsa 123, Ciudad A'),
-('cliente2@example.com', '0987654321', 'María López', 'Avenida Siempre Viva 742, Ciudad B'),
-('cliente3@example.com', '1122334455', 'Carlos García', 'Boulevard de los Sueños Rotos, Ciudad C'),
-('cliente4@example.com', '2233445566', 'Ana Torres', 'Plaza Mayor 456, Ciudad D'),
-('cliente5@example.com', '3344556677', 'Luis Fernández', 'Calle de la Amargura 789, Ciudad E');
+DELIMITER //
+CREATE PROCEDURE EditarCliente( IN _ID INT, IN _Doc INT, IN _email VARCHAR(100), IN _phone VARCHAR(15), IN _name VARCHAR(100), IN _address VARCHAR(100) ) 
+BEGIN 
+	UPDATE client 
+	SET Doc = _Doc, email = _email, phone = _phone, name = _name, address = _address 
+	WHERE ID = _ID;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE CrearCliente( IN _ID INT, IN _Doc INT, IN _email VARCHAR(100), IN _phone VARCHAR(15), IN _name VARCHAR(100), IN _address VARCHAR(100) ) 
+BEGIN 
+	INSERT INTO client (Doc, email, phone, name, address) 
+    VALUES (_Doc, _email, _phone, _name, _address);
+END //
+DELIMITER ;
+
+INSERT INTO client (Doc, email, phone, name, address) VALUES
+(1, 'cliente1@example.com', '1234567890', 'Juan Pérez', 'Calle Falsa 123, Ciudad A'),
+(2, 'cliente2@example.com', '0987654321', 'María López', 'Avenida Siempre Viva 742, Ciudad B'),
+(3, 'cliente3@example.com', '1122334455', 'Carlos García', 'Boulevard de los Sueños Rotos, Ciudad C'),
+(4, 'cliente4@example.com', '2233445566', 'Ana Torres', 'Plaza Mayor 456, Ciudad D'),
+(5, 'cliente5@example.com', '3344556677', 'Luis Fernández', 'Calle de la Amargura 789, Ciudad E');
 
 INSERT INTO supplier (email, phone, name, description, address) VALUES
 ('proveedor1@example.com', '5551234567', 'Proveedores S.A.', 'Distribuidor de productos para ciclistas', 'Calle Proveedor 1, Ciudad F'),

@@ -13,16 +13,39 @@ namespace Logica
     {
         public DataTable GetAll()
         {
-            BaseDatos baseDatos = new BaseDatos();
+            ClienteDB clienteDB = new ClienteDB();
             DataTable dataTable = new DataTable();
-            dataTable=baseDatos.GetClientes();
+            dataTable= clienteDB.GetClientes();
             return dataTable;
         }
 
-        public void Delete(int Doc)
+        public void Delete(int ID)
         {
-            BaseDatos baseDatos = new BaseDatos();
-            baseDatos.DeleteCliente(Doc);
+            ClienteDB clienteDB = new ClienteDB();
+            clienteDB.DeleteCliente(ID);
+        }
+
+        public void Update(int ID, int Doc, string email, string phone, string name, string address)
+        {
+            ClienteDB clienteDB = new ClienteDB();
+            Cliente cliente = new Cliente();
+            cliente.Doc = Doc;
+            cliente.email = email;
+            cliente.phone = phone;
+            cliente.name = name;
+            cliente.address = address;
+            clienteDB.Update(ID, cliente);
+        }
+        public void Create( int Doc, string email, string phone, string name, string address)
+        {
+            ClienteDB clienteDB = new ClienteDB();
+            Cliente cliente = new Cliente();
+            cliente.Doc = Doc;
+            cliente.email = email;
+            cliente.phone = phone;
+            cliente.name = name;
+            cliente.address = address;
+            clienteDB.Create(cliente);
         }
     }
 }

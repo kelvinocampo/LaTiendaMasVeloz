@@ -33,7 +33,6 @@
             splitContainer1 = new SplitContainer();
             splitContainer3 = new SplitContainer();
             label3 = new Label();
-            jeje = new Label();
             LinkProveedores = new Label();
             LinkProductos = new Label();
             label2 = new Label();
@@ -96,7 +95,6 @@
             // splitContainer3.Panel1
             // 
             splitContainer3.Panel1.Controls.Add(label3);
-            splitContainer3.Panel1.Controls.Add(jeje);
             splitContainer3.Panel1.Controls.Add(LinkProveedores);
             splitContainer3.Panel1.Controls.Add(LinkProductos);
             splitContainer3.Panel1.Controls.Add(label2);
@@ -120,15 +118,6 @@
             label3.Size = new Size(64, 23);
             label3.TabIndex = 7;
             label3.Text = "Clientes";
-            // 
-            // jeje
-            // 
-            jeje.AutoSize = true;
-            jeje.Location = new Point(29, 253);
-            jeje.Name = "jeje";
-            jeje.Size = new Size(38, 15);
-            jeje.TabIndex = 6;
-            jeje.Text = "label3";
             // 
             // LinkProveedores
             // 
@@ -248,8 +237,6 @@
             // 
             // dataGridView1
             // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = true;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.WhiteSmoke;
@@ -267,7 +254,6 @@
             dataGridView1.GridColor = Color.WhiteSmoke;
             dataGridView1.Location = new Point(20, 20);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
             dataGridView1.Size = new Size(801, 441);
             dataGridView1.TabIndex = 7;
             // 
@@ -317,7 +303,6 @@
         private SplitContainer splitContainer3;
         private SplitContainer splitContainer5;
         private Label Title;
-        private Label jeje;
         private Label label3;
         private SplitContainer splitContainer2;
     }
