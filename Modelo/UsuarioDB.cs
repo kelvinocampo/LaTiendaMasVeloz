@@ -9,23 +9,23 @@ using MySql.Data.MySqlClient;
 
 namespace Modelo
 {
-    public class ClienteDB : ConexionMYSQL
+    public class UsuarioDB : ConexionMYSQL
     {
         public DataTable GetClientes()
         {
             MySqlCommand cmd = GetConnection().CreateCommand();
             DataTable dataTable = new DataTable();
-            cmd.CommandText = "ObtenerClientes";
+            cmd.CommandText = "ObtenerUsuarios";
             cmd.CommandType = CommandType.StoredProcedure;
             MySqlDataReader dr = cmd.ExecuteReader();
             dataTable.Load(dr);
             return dataTable;
         }
 
-        public Cliente GetCliente(int ID)
+        public Usuario GetCliente(int ID)
         {
             MySqlCommand cmd = GetConnection().CreateCommand();
-            cmd.CommandText = "ObtenerCliente";
+            cmd.CommandText = "ObtenerUsuario";
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@_ID", ID);
 
@@ -33,13 +33,14 @@ namespace Modelo
             {
                 if (dr.Read()) // Verifica si hay resultados
                 {
-                    Cliente cliente = new Cliente
+                    Usuario cliente = new Usuario
                     {
                         Doc = dr.GetInt32("Documento"),
                         email = dr.GetString("Correo"),
                         phone = dr.GetString("Telefono"),
                         name = dr.GetString("Nombre"),
-                        address = dr.GetString("Direccion")
+                        address = dr.GetString("Direccion"),
+                        role = dr.GetString("Rol")
                     };
                     return cliente;
                 }
@@ -50,35 +51,37 @@ namespace Modelo
         public void DeleteCliente(int ID)
         {
             MySqlCommand cmd = GetConnection().CreateCommand();
-            cmd.CommandText = "EliminarCliente";
+            cmd.CommandText = "EliminarUsuario";
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@_ID", ID);
             MySqlDataReader dr = cmd.ExecuteReader();
         }
 
-        public void Update(int ID, Cliente cliente)
+        public void Update(int ID, Usuario cliente)
         {
             MySqlCommand cmd = GetConnection().CreateCommand();
-            cmd.CommandText = "EditarCliente";
+            cmd.CommandText = "EditarUsuario";
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@_Doc", cliente.Doc);
             cmd.Parameters.AddWithValue("@_email", cliente.email);
             cmd.Parameters.AddWithValue("@_phone", cliente.phone);
             cmd.Parameters.AddWithValue("@_name", cliente.name);
             cmd.Parameters.AddWithValue("@_address", cliente.address);
+            cmd.Parameters.AddWithValue("@_role", cliente.role);
             cmd.Parameters.AddWithValue("@_ID", ID);
             MySqlDataReader dr = cmd.ExecuteReader();
         }
 
-        public void Create( Cliente cliente)
+        public void Create( Usuario cliente)
         {
             MySqlCommand cmd = GetConnection().CreateCommand();
-            cmd.CommandText = "CrearCliente";
+            cmd.CommandText = "CrearUsuario";
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@_Doc", cliente.Doc);
             cmd.Parameters.AddWithValue("@_email", cliente.email);
             cmd.Parameters.AddWithValue("@_phone", cliente.phone);
             cmd.Parameters.AddWithValue("@_name", cliente.name);
+            cmd.Parameters.AddWithValue("@_role", cliente.role);
             cmd.Parameters.AddWithValue("@_address", cliente.address);
             MySqlDataReader dr = cmd.ExecuteReader();
         }

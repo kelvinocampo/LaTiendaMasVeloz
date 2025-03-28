@@ -21,7 +21,6 @@ namespace Principal
         private void Clientes_Load(object sender, EventArgs e)
         {
             CargarDatos();
-            AgregarBotones();
             dataGridView1.CellDoubleClick += new DataGridViewCellEventHandler(ButtonsActions);
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
@@ -35,7 +34,32 @@ namespace Principal
             try
             {
                 ClienteController clienteController = new ClienteController();
-                dataGridView1.DataSource = clienteController.GetAll();
+
+                DataTable clientes = clienteController.GetAll();
+
+                dataGridView1.DataSource = clientes;
+
+                dataGridView1.Columns.Remove("Rol");
+
+                DataGridViewComboBoxColumn cmb = new DataGridViewComboBoxColumn
+                {
+                    Name = "Rol",
+                    HeaderText = "Rol",
+                    DataPropertyName = "Rol"
+                };
+                cmb.DefaultCellStyle.BackColor = Color.LightBlue; // Color de fondo
+                cmb.DefaultCellStyle.ForeColor = Color.Black; // Color de texto
+                cmb.DefaultCellStyle.SelectionBackColor = Color.DarkBlue; // Color de fondo al seleccionar
+                cmb.DefaultCellStyle.SelectionForeColor = Color.White; // Color de texto al seleccionar
+
+                cmb.Items.Add("Trabajador");
+                cmb.Items.Add("Admin");
+                cmb.Items.Add("Cliente");
+                cmb.Items.Add("Proveedor");
+
+                dataGridView1.Columns.Add(cmb);
+
+                AgregarBotones();
             }
             catch (Exception ex)
             {
@@ -126,8 +150,12 @@ namespace Principal
                 string phone = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Telefono"].Value);
                 string name = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Nombre"].Value);
                 string address = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Direccion"].Value);
-                clienteController.Update(ID, Doc, email, phone, name, address);
+                string role = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Rol"].Value);
+                clienteController.Update(ID, Doc, email, phone, name, address, role);
 
+                dataGridView1.Columns.Remove("Editar");
+                dataGridView1.Columns.Remove("Eliminar");
+                dataGridView1.Columns.Remove("Guardar");
                 CargarDatos();
             }
         }
