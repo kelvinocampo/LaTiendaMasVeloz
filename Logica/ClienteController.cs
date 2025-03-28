@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Modelo;
 using Modelo.Entities;
 
@@ -34,8 +35,34 @@ namespace Logica
             cliente.phone = phone;
             cliente.name = name;
             cliente.address = address;
-            clienteDB.Update(ID, cliente);
+
+            bool clienteExist = GetByID(ID);
+
+            if (clienteExist)
+            {
+                clienteDB.Update(ID, cliente);
+            }
+            else
+            {
+                Create(Doc, email, phone, name, address);
+            }
         }
+
+        public bool GetByID(int ID)
+        {
+            ClienteDB clienteDB = new ClienteDB();
+            var cliente = clienteDB.GetCliente(ID);
+
+            if (cliente == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public void Create( int Doc, string email, string phone, string name, string address)
         {
             ClienteDB clienteDB = new ClienteDB();

@@ -41,6 +41,7 @@
             splitContainer2 = new SplitContainer();
             splitContainer5 = new SplitContainer();
             pictureBox2 = new PictureBox();
+            AllowAdd = new Button();
             Title = new Label();
             dataGridView1 = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -115,9 +116,9 @@
             label3.ForeColor = Color.FromArgb(64, 64, 64);
             label3.Location = new Point(29, 135);
             label3.Name = "label3";
-            label3.Size = new Size(64, 23);
+            label3.Size = new Size(67, 23);
             label3.TabIndex = 7;
-            label3.Text = "Clientes";
+            label3.Text = "Usuarios";
             // 
             // LinkProveedores
             // 
@@ -208,6 +209,7 @@
             // 
             // splitContainer5.Panel2
             // 
+            splitContainer5.Panel2.Controls.Add(AllowAdd);
             splitContainer5.Panel2.Controls.Add(Title);
             splitContainer5.Size = new Size(801, 111);
             splitContainer5.SplitterDistance = 108;
@@ -224,19 +226,35 @@
             pictureBox2.TabIndex = 5;
             pictureBox2.TabStop = false;
             // 
+            // AllowAdd
+            // 
+            AllowAdd.BackColor = Color.RoyalBlue;
+            AllowAdd.FlatAppearance.BorderSize = 0;
+            AllowAdd.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            AllowAdd.ForeColor = Color.White;
+            AllowAdd.Location = new Point(404, 30);
+            AllowAdd.Name = "AllowAdd";
+            AllowAdd.Padding = new Padding(8, 10, 8, 10);
+            AllowAdd.Size = new Size(140, 58);
+            AllowAdd.TabIndex = 7;
+            AllowAdd.Text = "Crear usuario";
+            AllowAdd.UseVisualStyleBackColor = false;
+            AllowAdd.Click += AllowAdd_Click;
+            // 
             // Title
             // 
             Title.AutoSize = true;
             Title.Font = new Font("Gill Sans MT", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Title.ForeColor = Color.RoyalBlue;
-            Title.Location = new Point(572, 35);
+            Title.Location = new Point(566, 35);
             Title.Name = "Title";
-            Title.Size = new Size(114, 40);
+            Title.Size = new Size(120, 40);
             Title.TabIndex = 6;
-            Title.Text = "Clientes";
+            Title.Text = "Usuarios";
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToOrderColumns = true;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.WhiteSmoke;
@@ -305,5 +323,6 @@
         private Label Title;
         private Label label3;
         private SplitContainer splitContainer2;
+        private Button AllowAdd;
     }
 }

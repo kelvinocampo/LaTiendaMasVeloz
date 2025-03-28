@@ -22,6 +22,31 @@ namespace Modelo
             return dataTable;
         }
 
+        public Cliente GetCliente(int ID)
+        {
+            MySqlCommand cmd = GetConnection().CreateCommand();
+            cmd.CommandText = "ObtenerCliente";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@_ID", ID);
+
+            using (MySqlDataReader dr = cmd.ExecuteReader())
+            {
+                if (dr.Read()) // Verifica si hay resultados
+                {
+                    Cliente cliente = new Cliente
+                    {
+                        Doc = dr.GetInt32("Documento"),
+                        email = dr.GetString("Correo"),
+                        phone = dr.GetString("Telefono"),
+                        name = dr.GetString("Nombre"),
+                        address = dr.GetString("Direccion")
+                    };
+                    return cliente;
+                }
+            }
+            return null; // Retorna null si no se encuentra el cliente
+        }
+
         public void DeleteCliente(int ID)
         {
             MySqlCommand cmd = GetConnection().CreateCommand();

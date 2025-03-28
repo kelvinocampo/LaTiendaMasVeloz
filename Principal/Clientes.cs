@@ -41,6 +41,13 @@ namespace Principal
             {
                 MessageBox.Show("Error al cargar datos: " + ex.Message);
             }
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                row.ReadOnly = true;
+            }
+            dataGridView1.Columns["ID"].ReadOnly = true;
+
         }
 
         private void AgregarBotones()
@@ -99,6 +106,10 @@ namespace Principal
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index)
             {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    row.ReadOnly = true;
+                }
                 dataGridView1.Rows[e.RowIndex].ReadOnly = false;
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Guardar"].Index)
@@ -110,7 +121,7 @@ namespace Principal
 
                 ClienteController clienteController = new ClienteController();
                 int ID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["ID"].Value);
-                int Doc = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Documento"].Value);
+                int Doc = (Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Documento"].Value));
                 string email = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Correo"].Value);
                 string phone = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Telefono"].Value);
                 string name = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Nombre"].Value);
@@ -119,6 +130,11 @@ namespace Principal
 
                 CargarDatos();
             }
+        }
+
+        private void AllowAdd_Click(object sender, EventArgs e)
+        {
+            dataGridView1.AllowUserToAddRows = !(dataGridView1.AllowUserToAddRows);
         }
     }
 }

@@ -7,11 +7,11 @@ USE TiendaDB;
 DROP TABLE IF EXISTS client;
 CREATE TABLE IF NOT EXISTS client(
 ID INT PRIMARY KEY AUTO_INCREMENT,
-Doc INT,
-email VARCHAR(100),
-phone VARCHAR(15),
-name VARCHAR(100),
-address VARCHAR(100)
+Doc INT NULL,
+email VARCHAR(100) NULL,
+phone VARCHAR(15) NULL,
+name VARCHAR(100) NULL,
+address VARCHAR(100) NULL
 );
 
 DROP TABLE IF EXISTS supplier;
@@ -54,6 +54,22 @@ BEGIN
 END //
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS ObtenerCliente;
+DELIMITER //
+CREATE PROCEDURE ObtenerCliente(IN _ID INT)
+BEGIN
+    SELECT 
+		ID,
+        Doc AS Documento,
+        email AS Correo,
+        phone AS Telefono,
+        name AS Nombre,
+        address AS Direccion
+    FROM client
+    WHERE ID = _ID;
+END //
+DELIMITER ;
+
 DROP PROCEDURE IF EXISTS EliminarCliente;
 DELIMITER $$
 CREATE PROCEDURE EliminarCliente(IN _ID INT)
@@ -72,7 +88,7 @@ END //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE CrearCliente( IN _ID INT, IN _Doc INT, IN _email VARCHAR(100), IN _phone VARCHAR(15), IN _name VARCHAR(100), IN _address VARCHAR(100) ) 
+CREATE PROCEDURE CrearCliente( IN _Doc INT, IN _email VARCHAR(100), IN _phone VARCHAR(15), IN _name VARCHAR(100), IN _address VARCHAR(100) ) 
 BEGIN 
 	INSERT INTO client (Doc, email, phone, name, address) 
     VALUES (_Doc, _email, _phone, _name, _address);
