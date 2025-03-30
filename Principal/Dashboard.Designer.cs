@@ -1,6 +1,6 @@
 ﻿namespace Principal
 {
-    partial class Clientes
+    partial class Dashboard
     {
         /// <summary>
         /// Required designer variable.
@@ -28,12 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Clientes));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             splitContainer1 = new SplitContainer();
             splitContainer3 = new SplitContainer();
-            label3 = new Label();
-            LinkProveedores = new Label();
+            LinkUsuario = new Label();
             LinkProductos = new Label();
             label2 = new Label();
             label1 = new Label();
@@ -81,8 +80,8 @@
             // 
             splitContainer1.Panel2.BackColor = Color.White;
             splitContainer1.Panel2.Controls.Add(splitContainer2);
-            splitContainer1.Size = new Size(1108, 636);
-            splitContainer1.SplitterDistance = 263;
+            splitContainer1.Size = new Size(1490, 636);
+            splitContainer1.SplitterDistance = 264;
             splitContainer1.TabIndex = 0;
             // 
             // splitContainer3
@@ -95,8 +94,7 @@
             // 
             // splitContainer3.Panel1
             // 
-            splitContainer3.Panel1.Controls.Add(label3);
-            splitContainer3.Panel1.Controls.Add(LinkProveedores);
+            splitContainer3.Panel1.Controls.Add(LinkUsuario);
             splitContainer3.Panel1.Controls.Add(LinkProductos);
             splitContainer3.Panel1.Controls.Add(label2);
             splitContainer3.Panel1.Controls.Add(label1);
@@ -105,31 +103,21 @@
             // splitContainer3.Panel2
             // 
             splitContainer3.Panel2.Controls.Add(pictureBox1);
-            splitContainer3.Size = new Size(263, 636);
+            splitContainer3.Size = new Size(264, 636);
             splitContainer3.SplitterDistance = 417;
             splitContainer3.TabIndex = 6;
             // 
-            // label3
+            // LinkUsuario
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Gill Sans MT", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.FromArgb(64, 64, 64);
-            label3.Location = new Point(29, 135);
-            label3.Name = "label3";
-            label3.Size = new Size(67, 23);
-            label3.TabIndex = 7;
-            label3.Text = "Usuarios";
-            // 
-            // LinkProveedores
-            // 
-            LinkProveedores.AutoSize = true;
-            LinkProveedores.Font = new Font("Gill Sans MT", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            LinkProveedores.ForeColor = Color.FromArgb(64, 64, 64);
-            LinkProveedores.Location = new Point(29, 179);
-            LinkProveedores.Name = "LinkProveedores";
-            LinkProveedores.Size = new Size(93, 23);
-            LinkProveedores.TabIndex = 3;
-            LinkProveedores.Text = "Proveedores";
+            LinkUsuario.AutoSize = true;
+            LinkUsuario.Font = new Font("Gill Sans MT", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            LinkUsuario.ForeColor = Color.FromArgb(64, 64, 64);
+            LinkUsuario.Location = new Point(29, 135);
+            LinkUsuario.Name = "LinkUsuario";
+            LinkUsuario.Size = new Size(67, 23);
+            LinkUsuario.TabIndex = 7;
+            LinkUsuario.Text = "Usuarios";
+            LinkUsuario.Click += LinkUsuario_Click;
             // 
             // LinkProductos
             // 
@@ -142,6 +130,7 @@
             LinkProductos.Size = new Size(76, 23);
             LinkProductos.TabIndex = 2;
             LinkProductos.Text = "Productos";
+            LinkProductos.Click += LinkProductos_Click;
             // 
             // label2
             // 
@@ -170,7 +159,7 @@
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(263, 215);
+            pictureBox1.Size = new Size(264, 215);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -192,7 +181,7 @@
             // 
             splitContainer2.Panel2.Controls.Add(dataGridView1);
             splitContainer2.Panel2.Padding = new Padding(20);
-            splitContainer2.Size = new Size(841, 636);
+            splitContainer2.Size = new Size(1222, 636);
             splitContainer2.SplitterDistance = 151;
             splitContainer2.TabIndex = 0;
             // 
@@ -211,8 +200,8 @@
             // 
             splitContainer5.Panel2.Controls.Add(AllowAdd);
             splitContainer5.Panel2.Controls.Add(Title);
-            splitContainer5.Size = new Size(801, 111);
-            splitContainer5.SplitterDistance = 108;
+            splitContainer5.Size = new Size(1182, 111);
+            splitContainer5.SplitterDistance = 147;
             splitContainer5.TabIndex = 6;
             // 
             // pictureBox2
@@ -221,7 +210,7 @@
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
             pictureBox2.Location = new Point(0, 0);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(108, 111);
+            pictureBox2.Size = new Size(147, 111);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 5;
             pictureBox2.TabStop = false;
@@ -232,10 +221,10 @@
             AllowAdd.FlatAppearance.BorderSize = 0;
             AllowAdd.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             AllowAdd.ForeColor = Color.White;
-            AllowAdd.Location = new Point(404, 30);
+            AllowAdd.Location = new Point(668, 30);
             AllowAdd.Name = "AllowAdd";
             AllowAdd.Padding = new Padding(8, 10, 8, 10);
-            AllowAdd.Size = new Size(140, 58);
+            AllowAdd.Size = new Size(195, 58);
             AllowAdd.TabIndex = 7;
             AllowAdd.Text = "Crear usuario";
             AllowAdd.UseVisualStyleBackColor = false;
@@ -246,7 +235,7 @@
             Title.AutoSize = true;
             Title.Font = new Font("Gill Sans MT", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Title.ForeColor = Color.RoyalBlue;
-            Title.Location = new Point(566, 35);
+            Title.Location = new Point(869, 35);
             Title.Name = "Title";
             Title.Size = new Size(120, 40);
             Title.TabIndex = 6;
@@ -272,18 +261,18 @@
             dataGridView1.GridColor = Color.WhiteSmoke;
             dataGridView1.Location = new Point(20, 20);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(801, 441);
+            dataGridView1.Size = new Size(1182, 441);
             dataGridView1.TabIndex = 7;
             // 
-            // Clientes
+            // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1108, 636);
+            ClientSize = new Size(1490, 636);
             Controls.Add(splitContainer1);
-            Name = "Clientes";
+            Name = "Dashboard";
             Text = "Clientes";
-            Load += Clientes_Load;
+            Load += Dashboard_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
@@ -321,7 +310,7 @@
         private SplitContainer splitContainer3;
         private SplitContainer splitContainer5;
         private Label Title;
-        private Label label3;
+        private Label LinkUsuario;
         private SplitContainer splitContainer2;
         private Button AllowAdd;
     }
