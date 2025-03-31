@@ -15,6 +15,42 @@ address VARCHAR(100) NULL,
 role ENUM("Trabajador", "Admin", "Cliente", "Proveedor")
 );
 
+DROP TABLE IF EXISTS user;
+CREATE TABLE IF NOT EXISTS user(
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Doc INT NULL,
+    email VARCHAR(100) NULL,
+    phone VARCHAR(15) NULL,
+    name VARCHAR(100) NULL,
+    address VARCHAR(100) NULL,
+    role ENUM("Trabajador", "Admin", "Cliente", "Proveedor")
+);
+
+DROP TABLE IF EXISTS worker;
+CREATE TABLE IF NOT EXISTS worker(
+    user_ID INT PRIMARY KEY,
+    FOREIGN KEY (user_ID) REFERENCES user(ID) ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS admin;
+CREATE TABLE IF NOT EXISTS admin(
+    user_ID INT PRIMARY KEY,
+    FOREIGN KEY (user_ID) REFERENCES user(ID) ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS client;
+CREATE TABLE IF NOT EXISTS client(
+    user_ID INT PRIMARY KEY,
+    FOREIGN KEY (user_ID) REFERENCES user(ID) ON DELETE CASCADE
+);
+
+-- Tabla especializada para Proveedores (sin campos adicionales)
+DROP TABLE IF EXISTS supplier;
+CREATE TABLE IF NOT EXISTS supplier(
+    user_ID INT PRIMARY KEY,
+    FOREIGN KEY (user_ID) REFERENCES user(ID) ON DELETE CASCADE
+);
+
 DROP TABLE IF EXISTS product;
 CREATE TABLE IF NOT EXISTS product(
 ID INT PRIMARY KEY AUTO_INCREMENT,
@@ -22,6 +58,46 @@ name VARCHAR(100),
 stock INT,
 price INT,
 creationDate DATE
+);
+
+-- Tabla FacturaEntrada
+CREATE TABLE inputBill (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    supplierID INT NOT NULL, 
+    creationDate DATE NOT NULL,
+    FOREIGN KEY (supplierID) REFERENCES supplier(user_ID)
+);
+
+-- Tabla DetalleFacturaEntrada
+CREATE TABLE detailsInputBill (
+    billID INT NOT NULL, 
+    productID INT NOT NULL, 
+    quantity INT NOT NULL, 
+    buyPrice INT,
+    PRIMARY KEY (billID, productID),
+    FOREIGN KEY (billID) REFERENCES inputBill(ID),
+    FOREIGN KEY (productID) REFERENCES product(ID)
+);
+
+-- Tabla FacturaSalida
+CREATE TABLE outputBill (
+    billID INT AUTO_INCREMENT PRIMARY KEY,
+    workerID INT NOT NULL,
+    clientID INT NOT NULL, 
+    creationDate DATE NOT NULL,
+    FOREIGN KEY (workerID) REFERENCES worker(user_ID),
+    FOREIGN KEY (clientID) REFERENCES client(user_ID)
+);
+
+-- Tabla DetalleFacturaSalida
+CREATE TABLE detailsOutputBill (
+    billID INT NOT NULL, 
+    productID INT NOT NULL, 
+    quantity INT NOT NULL, 
+    sellPrice INT, 
+    PRIMARY KEY (billID, productID),
+    FOREIGN KEY (billID) REFERENCES outputBill(billID),
+    FOREIGN KEY (productID) REFERENCES product(ID)
 );
 
 -- SP Usuarios
@@ -151,6 +227,10 @@ INSERT INTO user (Doc, email, phone, name, address, role) VALUES
 (3, 'cliente3@example.com', '1122334455', 'Carlos García', 'Boulevard de los Sueños Rotos, Ciudad C', "Cliente"),
 (4, 'cliente4@example.com', '2233445566', 'Ana Torres', 'Plaza Mayor 456, Ciudad D', "Proveedor"),
 (5, 'cliente5@example.com', '3344556677', 'Luis Fernández', 'Calle de la Amargura 789, Ciudad E', "Cliente");
+INSERT INTO client (user_ID) VALUES (3), (5);
+INSERT INTO worker (user_ID) VALUES (1);
+INSERT INTO admin (user_ID) VALUES (2);
+INSERT INTO supplier (user_ID) VALUES (4);
 
 INSERT INTO product (name, stock, price, creationDate) VALUES
 ('Bicicleta de montaña', 10, 500, '2023-01-01'),
