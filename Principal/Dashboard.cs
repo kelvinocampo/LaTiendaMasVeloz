@@ -13,7 +13,7 @@ namespace Principal
 {
     public partial class Dashboard : Form
     {
-        public string entity = "Usuarios";
+        public string entity = "Productos";
         public Dashboard()
         {
             InitializeComponent();
@@ -141,15 +141,14 @@ namespace Principal
                 {
                     UsuarioController usuarioController = new UsuarioController();
                     usuarioController.Delete(ID);
-                }else if(entity== "Productos")
+                }
+                else if (entity == "Productos")
                 {
                     ProductoController productoController = new ProductoController();
                     productoController.Delete(ID);
                 }
-                
-                dataGridView1.Columns.Remove("Editar");
-                dataGridView1.Columns.Remove("Eliminar");
-                dataGridView1.Columns.Remove("Guardar");
+
+                RemoveButtonsAction();
                 CargarDatos();
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index)
@@ -178,7 +177,8 @@ namespace Principal
                     string address = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Direccion"].Value);
                     string role = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Rol"].Value);
                     usuarioController.Update(ID, Doc, email, phone, name, address, role);
-                }else if (entity == "Productos")
+                }
+                else if (entity == "Productos")
                 {
                     ProductoController productoController = new ProductoController();
                     string name = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Nombre"].Value);
@@ -188,10 +188,7 @@ namespace Principal
                     productoController.Update(ID, name, price, stock, creationDate);
                 }
 
-
-                dataGridView1.Columns.Remove("Editar");
-                dataGridView1.Columns.Remove("Eliminar");
-                dataGridView1.Columns.Remove("Guardar");
+                RemoveButtonsAction();
                 CargarDatos();
             }
         }
@@ -204,19 +201,29 @@ namespace Principal
         private void LinkUsuario_Click(object sender, EventArgs e)
         {
             entity = "Usuarios";
-            dataGridView1.Columns.Remove("Editar");
-            dataGridView1.Columns.Remove("Eliminar");
-            dataGridView1.Columns.Remove("Guardar");
+            RemoveButtonsAction();
             CargarDatos();
         }
 
         private void LinkProductos_Click(object sender, EventArgs e)
         {
             entity = "Productos";
+            RemoveButtonsAction();
+            CargarDatos();
+        }
+
+        private void RemoveButtonsAction()
+        {
             dataGridView1.Columns.Remove("Editar");
             dataGridView1.Columns.Remove("Eliminar");
             dataGridView1.Columns.Remove("Guardar");
-            CargarDatos();
+        }
+
+        private void LinkFacturas_Click(object sender, EventArgs e)
+        {
+            FacturasRead facturas = new FacturasRead();
+            facturas.Show();
+            this.Hide();
         }
     }
 }
